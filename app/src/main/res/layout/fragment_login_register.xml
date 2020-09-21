@@ -1,0 +1,36 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/colorAccent"
+    android:gravity="center"
+    android:weightSum="6">
+
+    <Button
+        android:id="@+id/main_login_button"
+        android:background="@drawable/button_main"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/main_register_button"
+        android:background="@drawable/button_main"
+        android:text="@string/register"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>

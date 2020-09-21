@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">GroceryApp</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="phone">Phone</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="all_categories">All Categories</string>
+    <string name="add_to_cart">Add to Cart</string>
+</resources>

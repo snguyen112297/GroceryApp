@@ -1,0 +1,75 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/colorAccent"
+    android:gravity="center"
+    android:weightSum="6">
+
+    <TextView
+        android:id="@+id/login_frag_text_view"
+        android:text="@string/login"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:gravity="center_vertical"/>
+
+    <EditText
+        android:id="@+id/login_edit_email"
+        android:background="@drawable/edit_text_main"
+        android:hint="@string/email"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:id="@+id/login_edit_password"
+        android:background="@drawable/edit_text_main"
+        android:hint="@string/password"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/login_button"
+        android:background="@drawable/button_main"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/login_register"
+        android:background="@drawable/button_main"
+        android:text="@string/register"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:layout_weight="1"/>
+
+
+</LinearLayout>
