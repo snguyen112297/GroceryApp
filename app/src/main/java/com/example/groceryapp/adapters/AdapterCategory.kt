@@ -45,7 +45,7 @@ class AdapterCategory(var context: Context): RecyclerView.Adapter<AdapterCategor
             itemView.text_view.text = category.catName
             itemView.setOnClickListener {
                 var intent = Intent(context, SubCategoryActivity::class.java)
-                intent.putExtra("catId", category.catId)
+                intent.putExtra(Category.KEY_CATEGORY, category)
                 context.startActivity(intent)
             }
         }

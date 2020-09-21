@@ -2,6 +2,8 @@ package com.example.groceryapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.groceryapp.fragments.LoginFragment
@@ -9,6 +11,7 @@ import com.example.groceryapp.R
 import com.example.groceryapp.fragments.CategoryDisplayFragment
 import com.example.groceryapp.fragments.LoginRegisterFragment
 import com.example.groceryapp.fragments.RegisterFragment
+import kotlinx.android.synthetic.main.action_bar.*
 
 class MainActivity : AppCompatActivity(),
     LoginRegisterFragment.OnFragmentInteraction,
@@ -21,11 +24,23 @@ class MainActivity : AppCompatActivity(),
         init()
     }
 
+    private fun setupToolbar(){
+        var toolbar = toolbar
+        toolbar.title = "Grocery"
+        setSupportActionBar(toolbar)
+    }
+
     private fun init(){
+        setupToolbar()
         var fragmentManager: FragmentManager = supportFragmentManager
         var fragmentTransaction = fragmentManager.beginTransaction()
         var loginRegisterFragment = LoginRegisterFragment()
         fragmentTransaction.add(R.id.main_fragment_container, loginRegisterFragment).commit()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
     }
 
     override fun onButtonClicked(fragment_name: String) {

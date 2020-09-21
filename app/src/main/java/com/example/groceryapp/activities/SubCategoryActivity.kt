@@ -3,15 +3,18 @@ package com.example.groceryapp.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.groceryapp.R
 import com.example.groceryapp.adapters.AdapterSubcategory
 import com.example.groceryapp.app.Endpoints
+import com.example.groceryapp.models.Category
 import com.example.groceryapp.models.Subcategory
 import com.example.groceryapp.models.SubcategoryResponse
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_sub_category.*
 
 class SubCategoryActivity : AppCompatActivity() {
@@ -25,9 +28,20 @@ class SubCategoryActivity : AppCompatActivity() {
     }
 
     private fun init(){
-        val catId: Int = intent.getIntExtra("catId", 1)
+        val cat = intent.getSerializableExtra(Category.KEY_CATEGORY) as Category
         adapterSubcategory = AdapterSubcategory(supportFragmentManager)
-        getData(catId)
+        var toolbar = toolbar
+        toolbar.title = cat.catName
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        getData(cat.catId)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            android.R.id.home -> finish()
+        }
+        return true
     }
 
     private fun getData(catId: Int){
