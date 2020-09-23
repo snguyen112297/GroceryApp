@@ -1,5 +1,6 @@
 package com.example.groceryapp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -41,6 +42,19 @@ class MainActivity : AppCompatActivity(),
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_cart -> {
+                var intent = Intent(this, CartActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
 
     override fun onButtonClicked(fragment_name: String) {

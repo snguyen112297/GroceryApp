@@ -48,7 +48,7 @@
             android:padding="16dp"/>
         <Button
             android:id="@+id/button_add"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:background="@drawable/button_main"
             android:text="@string/add_to_cart"
             android:layout_width="wrap_content"

@@ -8,6 +8,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.groceryapp.R
 import com.example.groceryapp.app.Endpoints
+import com.example.groceryapp.database.DBHelper
 import com.example.groceryapp.models.Product
 import com.example.groceryapp.models.ProductResponse
 import com.example.groceryapp.models.SingleProductResponse
@@ -17,6 +18,8 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.grid_photos_adapter.view.*
 
 class DetailActivity : AppCompatActivity() {
+    lateinit var dbHelper: DBHelper
+    lateinit var product: SingleProductResponse
     var productId: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +37,8 @@ class DetailActivity : AppCompatActivity() {
             Endpoints.getProductByProductId(productId),
             {
                 val gson = Gson()
-                val product = gson.fromJson(it, SingleProductResponse::class.java)
+                product = gson.fromJson(it, SingleProductResponse::class.java)
+                product.data.quantity = 0
                 val imageUrl:String = product.data.image
                 Picasso.get().load("http://rjtmobile.com/grocery/images/$imageUrl")
                     .resize(320, 320)
@@ -52,5 +56,17 @@ class DetailActivity : AppCompatActivity() {
             }
         )
         Volley.newRequestQueue(this).add(request)
+        dbHelper = DBHelper(this)
+        button_add.setOnClickListener {
+            if (product.data.quantity == 0){
+                dbHelper.addProduct(product.data)
+                product.data.quantity = 1
+            }
+            else
+            {
+                dbHelper.updateProduct(product.data, 1)
+                product.data.quantity += 1
+            }
+        }
     }
 }

@@ -1,8 +1,8 @@
 package com.example.groceryapp.models
 
 data class Product(
-    val quantity: Int,
-    val description: String,
+    var quantity: Int = 0,
+    var description: String,
     val status: Boolean,
     val position: Int,
     val created: String,
