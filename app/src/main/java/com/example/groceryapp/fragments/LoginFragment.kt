@@ -17,9 +17,12 @@ import com.example.groceryapp.activities.MainActivity
 import com.example.groceryapp.app.Endpoints
 import com.example.groceryapp.helpers.SessionManager
 import com.example.groceryapp.models.LoginResponse
+import com.example.groceryapp.models.User
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.android.synthetic.main.navigation_header.view.*
 import org.json.JSONObject
 
 class LoginFragment : Fragment() {
@@ -60,6 +63,7 @@ class LoginFragment : Fragment() {
                     sessionManager.saveToken(loginResponse.token)
                     Log.d("TAG", loginResponse.user.toString())
                     Toast.makeText(view.context, "Logged In", Toast.LENGTH_SHORT).show()
+                    listener?.onLoggedIn(loginResponse.user)
                     listener?.onButtonClicked("category_display_fragment")
                 },
                 {
@@ -78,6 +82,7 @@ class LoginFragment : Fragment() {
 
     interface OnFragmentInteraction{
         fun onButtonClicked(name: String)
+        fun onLoggedIn(user: User)
     }
 
     override fun onAttach(context: Context) {

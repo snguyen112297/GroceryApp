@@ -106,12 +106,6 @@ class MainActivity : AppCompatActivity(),
                 startActivity(intent)
                 true
             }
-            R.id.action_log_out -> {
-                sessionManager.logout()
-                var loginRegisterFragment = LoginRegisterFragment()
-                supportFragmentManager.beginTransaction().replace(R.id.main_fragment_container, loginRegisterFragment).commit()
-                true
-            }
             else -> {
                 super.onOptionsItemSelected(item)
             }
@@ -135,6 +129,13 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
+    override fun onLoggedIn(user: User) {
+        var headerView = main_navigation_view.getHeaderView(0)
+        headerView.navigation_header_name.text = user.firstName
+        headerView.navigation_header_email.text = user.email
+        headerView.navigation_header_mobile.text = user.mobile
+    }
+
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawer(GravityCompat.START)
@@ -152,7 +153,11 @@ class MainActivity : AppCompatActivity(),
                 sessionManager.logout()
                 var loginRegisterFragment = LoginRegisterFragment()
                 supportFragmentManager.beginTransaction().replace(R.id.main_fragment_container, loginRegisterFragment).commit()
-
+                var emptyUser = User(0, "0", "", "", "User", "", "")
+                var headerView = navView.getHeaderView(0)
+                headerView.navigation_header_name.text = emptyUser!!.firstName
+                headerView.navigation_header_email.text = emptyUser!!.email
+                headerView.navigation_header_mobile.text = emptyUser!!.mobile
             }
         })
 

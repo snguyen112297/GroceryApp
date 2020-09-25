@@ -18,6 +18,7 @@ import com.example.groceryapp.app.Endpoints
 import com.example.groceryapp.helpers.SessionManager
 import com.example.groceryapp.models.AddressResponse
 import com.example.groceryapp.models.CategoryResponse
+import com.example.groceryapp.models.PaymentResponse
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_address.*
@@ -37,6 +38,7 @@ class AddressActivity : AppCompatActivity() {
         var toolbar = toolbar
         toolbar.title = "Address"
         setSupportActionBar(toolbar)
+
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         address_add_new_button.setOnClickListener {
@@ -44,7 +46,9 @@ class AddressActivity : AppCompatActivity() {
         }
         getData()
 
+        var paymentResponse = intent.getSerializableExtra(PaymentResponse.KEY_PAYMENT) as PaymentResponse
         adapterAddress = AdapterAddress(this)
+        adapterAddress.setPayment(paymentResponse)
         address_recycler_view.layoutManager = LinearLayoutManager(this)
         address_recycler_view.adapter = adapterAddress
     }

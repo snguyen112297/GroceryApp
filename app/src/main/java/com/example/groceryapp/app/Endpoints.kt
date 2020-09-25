@@ -10,6 +10,7 @@ class Endpoints{
         const val URL_PRODUCTS = "products/sub"
         const val URL_PRODUCT = "products"
         const val URL_ADDRESS = "address"
+        const val URL_ORDERS = "orders"
 
         fun getLogin(): String{
             return Config.BASE_URL + URL_LOGIN
@@ -38,6 +39,10 @@ class Endpoints{
 
         fun getAddressByUserId(userId: String?): String{
             return "${Config.BASE_URL + URL_ADDRESS}/$userId"
+        }
+
+        fun postOrders(): String{
+            return Config.BASE_URL + URL_ORDERS
         }
 
         fun saveAddress(): String{
