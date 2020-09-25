@@ -49,12 +49,13 @@ class DBHelper (context: Context): SQLiteOpenHelper(context, DATA_NAME, null, DA
         val whereClause = "$COLUMN_ID = ?"
         val whereArgs: Array<String> = arrayOf(product._id)
         val contentValues = ContentValues()
+        var quantity = getProductQuantity(product._id)
         if (mode == 1) {
-            contentValues.put(COLUMN_QUANTITY, product.quantity + 1)
+            contentValues.put(COLUMN_QUANTITY, quantity + 1)
             database.update(TABLE_NAME, contentValues, whereClause, whereArgs)
         } else {
-            if (product.quantity > 1) {
-                contentValues.put(COLUMN_QUANTITY, product.quantity - 1)
+            if (quantity > 1) {
+                contentValues.put(COLUMN_QUANTITY, quantity - 1)
                 database.update(TABLE_NAME, contentValues, whereClause, whereArgs)
             } else {
                 deleteProduct(product._id)
@@ -105,6 +106,37 @@ class DBHelper (context: Context): SQLiteOpenHelper(context, DATA_NAME, null, DA
 
     fun getSize(): Int{
         return getProduct().size
+    }
+
+    fun getNumberOfItems(): Int{
+        var total = 0
+        var productList = this.getProduct()
+        for (i in 0 until productList.size){
+            total += productList[i].quantity
+        }
+        return total
+    }
+
+    fun getProductQuantity(id: String): Int{
+        /*
+        var productList = this.getProduct()
+        for (i in 0 until productList.size){
+            if (productList[i]._id == id)
+                return productList[i].quantity
+        }
+        */
+        var database = writableDatabase
+        var columns = arrayOf(
+            COLUMN_ID,
+            COLUMN_QUANTITY,
+        )
+        var cursor = database.query(TABLE_NAME, columns, "$COLUMN_ID = ?", arrayOf(id), null, null, COLUMN_ID)
+        if (cursor != null && cursor.moveToFirst()){
+            var quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_QUANTITY))
+            return quantity
+        }
+        cursor.close()
+        return 0
     }
 
 }

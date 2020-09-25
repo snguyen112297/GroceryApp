@@ -10,6 +10,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.groceryapp.R
+import com.example.groceryapp.app.Endpoints
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.view.*
@@ -43,16 +44,15 @@ class RegisterFragment : Fragment() {
 
                 var jsonObject = JSONObject(params as Map<*, *>)
 
-                var url = "https://grocery-second-app.herokuapp.com/api/auth/register"
-
                 var request = JsonObjectRequest(
                     Request.Method.POST,
-                    url,
+                    Endpoints.getRegister(),
                     jsonObject,
                     {
                         Toast.makeText(view.context, "registered", Toast.LENGTH_SHORT).show()
                     },
                     {
+                        Toast.makeText(view.context, "Not registered", Toast.LENGTH_SHORT).show()
                     }
                 )
                 Volley.newRequestQueue(view.context).add(request)

@@ -1,8 +1,11 @@
 package com.example.groceryapp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -32,6 +35,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun init(productId: String?){
+        dbHelper = DBHelper(this)
         val request = StringRequest(
             Request.Method.GET,
             Endpoints.getProductByProductId(productId),
@@ -50,23 +54,54 @@ class DetailActivity : AppCompatActivity() {
                 details_price.text = price
                 details_description.text = product.data.description
 
+
+                var dbQuantity = dbHelper.getProductQuantity(product.data._id)
+                if (dbQuantity == 0){
+                    setVisibility(View.VISIBLE, View.GONE)
+                } else {
+                    setVisibility(View.GONE, View.VISIBLE)
+                    details_cart_number.text = dbQuantity.toString()
+                }
             },
             {
 
             }
         )
         Volley.newRequestQueue(this).add(request)
-        dbHelper = DBHelper(this)
         button_add.setOnClickListener {
+            dbHelper.addProduct(product.data)
+            Toast.makeText(this, "Item added to cart", Toast.LENGTH_SHORT).show()
+            product.data.quantity = 1
+            setVisibility(View.GONE, View.VISIBLE)
+            details_cart_number.text = "1"
+        }
+
+        button_increase.setOnClickListener {
+            dbHelper.updateProduct(product.data, 1)
+            product.data.quantity = dbHelper.getProductQuantity(product.data._id)
+            details_cart_number.text = product.data.quantity.toString()
+        }
+
+        button_decrease.setOnClickListener {
+            dbHelper.updateProduct(product.data, 2)
+            product.data.quantity = dbHelper.getProductQuantity(product.data._id)
+            details_cart_number.text = product.data.quantity.toString()
             if (product.data.quantity == 0){
-                dbHelper.addProduct(product.data)
-                product.data.quantity = 1
-            }
-            else
-            {
-                dbHelper.updateProduct(product.data, 1)
-                product.data.quantity += 1
+                dbHelper.deleteProduct(product.data._id)
+                setVisibility(View.VISIBLE, View.GONE)
             }
         }
+
+        details_jump_to_cart.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+            finish()
+        }
+    }
+
+    private fun setVisibility(firstMode: Int, secondMode: Int){
+        button_add.visibility = firstMode
+        button_decrease.visibility = secondMode
+        button_increase.visibility = secondMode
+        details_cart_number.visibility = secondMode
     }
 }

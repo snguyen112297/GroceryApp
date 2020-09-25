@@ -22,4 +22,26 @@
     <string name="total">Total</string>
     <string name="_0">0</string>
     <string name="checkout">Checkout</string>
+    <string name="add_new_address">Add new address</string>
+    <string name="number">Number</string>
+    <string name="type">Type</string>
+    <string name="pin_code">Zipcode</string>
+    <string name="city">City</string>
+    <string name="street_name">Street name</string>
+    <string name="submit">Submit</string>
+    <string name="log_out">Log out</string>
+    <string name="view_cart">View Cart</string>
+    <string name="billing">Billing</string>
+    <string name="delivery">Delivery</string>
+    <string name="apply_coupon_and_offers">Apply Coupon and Offers</string>
+    <string name="pay_online">Pay online</string>
+    <string name="pay_by_cash_on_delivery">Pay by Cash on Delivery</string>
+    <string name="_dollar0">$0</string>
+    <string name="you_will_save_0_on_this_order">You will save $0 on this order</string>
+    <string name="hello">Hello</string>
+    <string name="my_account">My Account</string>
+    <string name="my_orders">Orders</string>
+    <string name="logout">Logout</string>
+    <string name="user">User</string>
+    <string name="grocery">Grocery App</string>
 </resources>

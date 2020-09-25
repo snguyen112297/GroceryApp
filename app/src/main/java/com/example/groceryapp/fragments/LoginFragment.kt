@@ -1,7 +1,9 @@
 package com.example.groceryapp.fragments
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,10 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.groceryapp.R
 import com.example.groceryapp.activities.MainActivity
+import com.example.groceryapp.app.Endpoints
+import com.example.groceryapp.helpers.SessionManager
+import com.example.groceryapp.models.LoginResponse
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import org.json.JSONObject
@@ -20,19 +26,21 @@ class LoginFragment : Fragment() {
 
     var listener: OnFragmentInteraction? = null
 
+    lateinit var  sessionManager: SessionManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_login, container, false)
+
+        sessionManager = SessionManager(view.context)
         init(view)
         return view
     }
 
     private fun init(view: View){
         view.login_button.setOnClickListener {
-            /*
             var email = login_edit_email.text.toString()
             var password = login_edit_password.text.toString()
 
@@ -41,22 +49,23 @@ class LoginFragment : Fragment() {
             params["password"] = password
 
             var jsonObject = JSONObject(params as Map<*, *>)
-
-            var url = "https://grocery-second-app.herokuapp.com/api/auth/register"
-
             var request = JsonObjectRequest(
                 Request.Method.POST,
-                url,
+                Endpoints.getLogin(),
                 jsonObject,
                 {
-                    Toast.makeText(view.context, "registered", Toast.LENGTH_SHORT).show()
+                    val gson = Gson()
+                    var loginResponse = gson.fromJson(it.toString(), LoginResponse::class.java)
+                    sessionManager.saveUser(loginResponse.user)
+                    sessionManager.saveToken(loginResponse.token)
+                    Log.d("TAG", loginResponse.user.toString())
+                    Toast.makeText(view.context, "Logged In", Toast.LENGTH_SHORT).show()
+                    listener?.onButtonClicked("category_display_fragment")
                 },
                 {
                 }
             )
             Volley.newRequestQueue(view.context).add(request)
-            */
-            listener?.onButtonClicked("category_display_fragment")
         }
 
         view.login_register.setOnClickListener {

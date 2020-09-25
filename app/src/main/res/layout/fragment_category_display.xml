@@ -3,9 +3,9 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@drawable/edit_text_main"
     android:gravity="center"
-    android:weightSum="6">
+    android:weightSum="7">
 
     <TextView
         android:id="@+id/category_text_view"
@@ -21,7 +21,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5">
+        android:gravity="center"
+        android:layout_weight="6"
+        android:layout_margin="2dp">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/category_recycler_view"
             android:layout_width="match_parent"

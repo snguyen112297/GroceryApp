@@ -36,6 +36,10 @@ class AdapterCartProduct(private var mContext: Context, private var mList: Array
         fun totalChanged()
     }
 
+    interface OnFinish{
+        fun cartFinish()
+    }
+
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(product: Product){
             var dbHelper = DBHelper(itemView.context)
@@ -60,6 +64,7 @@ class AdapterCartProduct(private var mContext: Context, private var mList: Array
                 var intent = Intent(itemView.context, DetailActivity::class.java)
                 intent.putExtra("productId", product._id)
                 itemView.context.startActivity(intent)
+                listener.cartFinish()
             }
             itemView.cart_product_adapter_increase.setOnClickListener {
                 dbHelper.updateProduct(product, 1)

@@ -10,12 +10,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.groceryapp.R
 import com.example.groceryapp.activities.MainActivity
+import com.example.groceryapp.helpers.SessionManager
 import kotlinx.android.synthetic.main.fragment_login_register.view.*
 
 class LoginRegisterFragment : Fragment() {
 
     var listener: OnFragmentInteraction? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

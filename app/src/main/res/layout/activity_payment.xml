@@ -1,0 +1,171 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <include layout="@layout/action_bar"/>
+
+    <TextView
+        android:id="@+id/payment_display_total_text"
+        android:text="@string/total"
+        android:textSize="32sp"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:paddingBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/payment_display_total"
+        android:text="@string/_dollar0"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/payment_display"
+        android:text="@string/you_will_save_0_on_this_order"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:paddingBottom="32dp"/>
+
+    <Button
+        android:id="@+id/payment_apply_coupon"
+        android:text="@string/apply_coupon_and_offers"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:background="@drawable/edit_text_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp">
+
+        <TextView
+            android:id="@+id/payment_sub_total_text"
+            android:text="@string/sub_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/payment_discount_text"
+            android:text="@string/discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/payment_sub_total_text"/>
+
+        <TextView
+            android:id="@+id/payment_delivery_text"
+            android:text="@string/delivery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/payment_discount_text"/>
+
+        <TextView
+            android:id="@+id/payment_order_amount_text"
+            android:text="@string/total"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/payment_delivery_text"/>
+
+        <TextView
+            android:id="@+id/payment_sub_total"
+            android:text="@string/_dollar0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"/>
+
+        <TextView
+            android:id="@+id/payment_discount"
+            android:text="@string/_dollar0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/payment_sub_total"/>
+
+        <TextView
+            android:id="@+id/payment_delivery"
+            android:text="@string/_dollar0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/payment_discount"/>
+
+        <TextView
+            android:id="@+id/payment_order_amount"
+            android:text="@string/_dollar0"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/payment_delivery"/>
+
+
+        <LinearLayout
+            android:id="@+id/payment_linear_layout"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/payment_online"
+                android:background="@drawable/button_main"
+                android:text="@string/pay_online"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="8dp"/>
+
+
+            <Button
+                android:id="@+id/payment_cash_on_delivery"
+                android:background="@drawable/button_main"
+                android:text="@string/pay_by_cash_on_delivery"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="8dp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,8 +1,9 @@
 package com.example.groceryapp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.groceryapp.R
@@ -12,7 +13,7 @@ import com.example.groceryapp.models.Product
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_cart.*
 
-class CartActivity : AppCompatActivity(), AdapterCartProduct.OnTotalChanged {
+class CartActivity : AppCompatActivity(), AdapterCartProduct.OnTotalChanged, AdapterCartProduct.OnFinish {
     lateinit var dbHelper: DBHelper
     var productList: ArrayList<Product> = ArrayList()
     lateinit var adapterCartProduct: AdapterCartProduct
@@ -25,15 +26,29 @@ class CartActivity : AppCompatActivity(), AdapterCartProduct.OnTotalChanged {
 
     private fun init(){
         dbHelper = DBHelper(this)
+
         productList = dbHelper.getProduct()
         adapterCartProduct = AdapterCartProduct(this, productList)
         cart_recycler_view.layoutManager = LinearLayoutManager(this)
         cart_recycler_view.adapter = adapterCartProduct
+
         var toolbar = toolbar
         toolbar.title = "Cart"
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         displayTotal()
+
+        cart_checkout_button.setOnClickListener {
+            startActivity(Intent(this, AddressActivity::class.java))
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            android.R.id.home -> finish()
+        }
+        return true
     }
 
     private fun displayTotal(){
@@ -69,5 +84,9 @@ class CartActivity : AppCompatActivity(), AdapterCartProduct.OnTotalChanged {
     override fun totalChanged(){
         displayTotal()
         refreshTextViews()
+    }
+
+    override fun cartFinish(){
+        this.finish()
     }
 }

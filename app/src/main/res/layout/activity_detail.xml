@@ -3,18 +3,20 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/white"
     android:gravity="center"
     android:padding="8dp"
-    android:weightSum="6">
+    android:weightSum="12">
 
     <ImageView
         android:id="@+id/details_image_view"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/edit_text_main"
         android:layout_width="match_parent"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         android:layout_height="0dp"
         android:layout_margin="8dp"
-        android:layout_weight="3" />
+        android:layout_weight="6" />
     <TextView
         android:id="@+id/details_name"
         android:textColor="@color/black"
@@ -30,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="8dp"
-        android:layout_weight="1"/>
+        android:layout_weight="3"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -38,7 +40,7 @@
         android:layout_margin="8dp">
 
         <TextView
-            android:background="@color/white"
+            android:background="@drawable/edit_text_main"
             android:textColor="@color/black"
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
@@ -57,6 +59,48 @@
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"/>
 
+        <Button
+            android:id="@+id/button_increase"
+            android:textColor="@color/black"
+            android:background="@drawable/button_increase"
+            android:padding="16dp"
+            android:layout_width="50dp"
+            android:layout_marginEnd="1dp"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@id/details_cart_number"/>
+
+        <TextView
+            android:id="@+id/details_cart_number"
+            android:textColor="@color/white"
+            android:background="@drawable/button_main"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@id/button_decrease"/>
+
+        <Button
+            android:id="@+id/button_decrease"
+            android:textColor="@color/black"
+            android:background="@drawable/button_decrease"
+            android:padding="16dp"
+            android:layout_width="50dp"
+            android:layout_marginStart="1dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
+    <Button
+        android:id="@+id/details_jump_to_cart"
+        android:layout_weight="1"
+        android:textColor="@color/white"
+        android:background="@drawable/button_main"
+        android:text="@string/view_cart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="16dp"
+        android:layout_margin="8dp"/>
 
 </LinearLayout>
