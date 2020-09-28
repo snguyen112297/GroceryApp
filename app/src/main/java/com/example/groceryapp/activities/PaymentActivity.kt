@@ -108,6 +108,5 @@ class PaymentActivity : AppCompatActivity() {
             }
         )
         Volley.newRequestQueue(this).add(request)
-
     }
 }

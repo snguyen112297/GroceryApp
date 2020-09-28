@@ -6,14 +6,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.MenuItemCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
 import com.example.groceryapp.R
+import com.example.groceryapp.database.DBHelper
 import com.example.groceryapp.fragments.CategoryDisplayFragment
 import com.example.groceryapp.fragments.LoginFragment
 import com.example.groceryapp.fragments.LoginRegisterFragment
@@ -23,6 +27,7 @@ import com.example.groceryapp.models.User
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.action_bar.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_menu_cart.view.*
 import kotlinx.android.synthetic.main.navigation_header.view.*
 
 class MainActivity : AppCompatActivity(),
@@ -33,6 +38,7 @@ class MainActivity : AppCompatActivity(),
     lateinit var navView: NavigationView
     private var user: User? = null
 
+    var textViewCartCount: TextView? = null
     lateinit var sessionManager: SessionManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +92,7 @@ class MainActivity : AppCompatActivity(),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.navigation_menu_item_account -> Toast.makeText(this, "Account", Toast.LENGTH_SHORT).show()
-            R.id.navigation_menu_item_orders -> Toast.makeText(this, "Orders", Toast.LENGTH_SHORT).show()
+            R.id.navigation_menu_item_orders -> startActivity(Intent(this, MyOrdersActivity::class.java))
             R.id.navigation_menu_item_settings -> Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
             R.id.navigation_menu_item_logout -> dialogueLogout()
         }
@@ -94,9 +100,27 @@ class MainActivity : AppCompatActivity(),
         return true
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
+        var item = menu.findItem(R.id.action_cart)
+        MenuItemCompat.setActionView(item, R.layout.layout_menu_cart)
+        var view = MenuItemCompat.getActionView(item)
+        view.setOnClickListener{
+            startActivity(Intent(this, CartActivity::class.java))
+        }
+        textViewCartCount = view.cart_text_view
+        updateCartCount()
         return true
+    }
+
+    private fun updateCartCount(){
+        var count = DBHelper(this).getNumberOfItems()
+        if (count == 0){
+            textViewCartCount?.visibility = View.GONE
+        } else {
+            textViewCartCount?.visibility = View.VISIBLE
+            textViewCartCount?.text = count.toString()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -168,6 +192,16 @@ class MainActivity : AppCompatActivity(),
         })
         var alertDialog = builder.create()
         alertDialog.show()
+    }
+
+    override fun onResume(){
+        updateCartCount()
+        super.onResume()
+    }
+
+    override fun onRestart(){
+        updateCartCount()
+        super.onRestart()
     }
 
 }

@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="40dp"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ImageView
+        android:id="@+id/cart_icon"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/action_cart"
+        android:layout_width="28dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/cart_text_view"
+        android:background="@drawable/badge_circle"
+        android:text="5"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:textSize="10sp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        tools:ignore="SmallSp" />
+
+</RelativeLayout>

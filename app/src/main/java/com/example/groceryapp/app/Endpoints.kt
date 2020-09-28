@@ -41,6 +41,10 @@ class Endpoints{
             return "${Config.BASE_URL + URL_ADDRESS}/$userId"
         }
 
+        fun getOrderByUserId(userId: String?): String{
+            return "${Config.BASE_URL + URL_ORDERS}/$userId"
+        }
+
         fun postOrders(): String{
             return Config.BASE_URL + URL_ORDERS
         }
